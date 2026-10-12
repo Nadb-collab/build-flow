@@ -7,6 +7,7 @@ the consumer in the same thread they started from the LSA listing.
 
 from __future__ import annotations
 
+import os
 from datetime import datetime, timedelta
 from typing import Iterable
 
@@ -55,8 +56,17 @@ class LsaClient:
         self._lead_service = client.get_service("LocalServicesLeadService")
 
     @classmethod
-    def from_yaml(cls, path: str, customer_id: str, login_customer_id: str = "") -> "LsaClient":
-        client = GoogleAdsClient.load_from_storage(path)
+    def from_config(cls, path: str, customer_id: str, login_customer_id: str = "") -> "LsaClient":
+        """Load credentials from the google-ads.yaml at `path`, or from GOOGLE_ADS_* env vars if it doesn't exist."""
+        if os.path.exists(path):
+            client = GoogleAdsClient.load_from_storage(path)
+        elif os.environ.get("GOOGLE_ADS_DEVELOPER_TOKEN"):
+            client = GoogleAdsClient.load_from_env()
+        else:
+            raise FileNotFoundError(
+                f"No Google Ads credentials: create {path} (see google-ads.example.yaml) "
+                "or set the GOOGLE_ADS_* environment variables"
+            )
         if login_customer_id:
             client.login_customer_id = login_customer_id
         return cls(client, customer_id)

@@ -33,7 +33,7 @@ def main(argv: list[str] | None = None) -> None:
     dry_run = s.dry_run and not args.live
 
     engine = Engine(
-        source=LsaClient.from_yaml(s.google_ads_config, s.customer_id, s.login_customer_id),
+        source=LsaClient.from_config(s.google_ads_config, s.customer_id, s.login_customer_id),
         responder=Responder(cfg.business, model=s.model, effort=s.effort),
         store=Store(s.db_path),
         notifier=Notifier(s.escalation_webhook_url),

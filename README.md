@@ -22,7 +22,7 @@ Safeguards:
 
 1. **Google Ads API access.** Your Local Services account must be reachable through the Google Ads API.
    - You need a developer token, OAuth client ID and secret, and a refresh token.
-   - Copy `google-ads.example.yaml` to `google-ads.yaml` and fill it in.
+   - Copy `google-ads.example.yaml` to `google-ads.yaml` and fill it in. On a server, you can set the `GOOGLE_ADS_*` environment variables listed in that file instead. They're used when `google-ads.yaml` doesn't exist.
    - Setup guide: <https://developers.google.com/google-ads/api/docs/get-started/introduction>
 2. **Anthropic API key.** Set `export ANTHROPIC_API_KEY=...`.
 3. **Business profile.** Copy `config/business.example.toml` to `config/business.toml`.
