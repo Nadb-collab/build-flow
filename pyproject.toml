@@ -1,0 +1,19 @@
+[project]
+name = "leadbot"
+version = "0.1.0"
+description = "Auto-responder for Google Local Services Ads (Google Guaranteed) leads"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=1.13",
+    "google-ads>=33.0",
+    "pydantic>=2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+leadbot = "leadbot.cli:main"
+
+[tool.setuptools]
+packages = ["leadbot"]

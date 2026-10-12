@@ -1,0 +1,43 @@
+# Copy to config/business.toml and fill in. Everything the bot tells customers
+# comes from the [business] section - it will not invent prices or facts.
+
+[settings]
+customer_id = "123-456-7890"        # Google Ads customer ID of the Local Services account
+login_customer_id = ""              # manager (MCC) account ID, if you access through one
+google_ads_config = "google-ads.yaml"
+db_path = "leadbot.db"
+lookback_days = 7                   # how far back to look for open leads
+poll_interval_seconds = 120
+max_auto_replies_per_lead = 3       # after this, hand the lead to a person
+escalation_webhook_url = ""         # Slack / Teams / any webhook accepting {"text": ...}
+model = "claude-opus-5-5"
+effort = "medium"
+dry_run = true                      # log replies instead of sending them; `--live` overrides
+
+[business]
+name = "Acme Plumbing"
+trade = "Plumber"
+service_area = "Austin, TX and suburbs within 25 miles (Round Rock, Cedar Park, Pflugerville)"
+hours = "Mon-Fri 7am-6pm, Sat 8am-2pm. 24/7 emergency service available."
+phone = "(512) 555-0100"
+services = [
+  "Leak detection and repair",
+  "Drain cleaning",
+  "Water heater repair and installation (tank and tankless)",
+  "Toilet, faucet and fixture repair",
+  "Sewer line inspection",
+]
+not_offered = ["Septic systems", "Commercial new construction"]
+pricing_notes = "Service call / diagnostic fee is $89, waived if we do the repair. Drain cleaning starts at $149. Everything else is quoted on site."
+booking_instructions = "Ask for the address and a preferred time window; tell them the office will confirm the appointment by phone within business hours."
+tone = "friendly, professional, concise"
+signature = "- Acme Plumbing team"
+extra_facts = [
+  "Licensed and insured, Google Guaranteed.",
+  "Free estimates for water heater replacement.",
+]
+escalate_when = [
+  "Active flooding, gas smell, or sewage backup (tell the team immediately)",
+  "Complaints about previous work, refunds, or billing disputes",
+  "Customer asks to talk to a person",
+]
